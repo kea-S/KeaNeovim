@@ -1,7 +1,7 @@
 vim.cmd([[
 augroup startup
 autocmd VimEnter * :tab all
-autocmd VimEnter * :10sp | ter 
+autocmd VimEnter * :40vsp | ter 
 autocmd VimEnter * wincmd w
 augroup END
 ]])
