@@ -5,8 +5,8 @@ return {
     require("chatgpt").setup({
       api_key_cmd = "pass show APIs/personal/neovim/chatGPTNvim",
       openai_params = {
-        model = "gpt-4o",
-        max_tokens = 500
+        model = "gpt-4o-mini",
+        max_tokens = 600
        }
     })
     vim.keymap.set('n', '<leader>gpt', ':ChatGPT<CR>')
