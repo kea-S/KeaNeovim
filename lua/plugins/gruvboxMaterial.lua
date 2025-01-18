@@ -9,7 +9,4 @@
 --     vim.cmd.colorscheme('gruvbox-material')
 --   end
 -- }
-
-return {
-
-}
+return {}
