@@ -2,9 +2,10 @@ vim.cmd([[
 augroup startup
 autocmd VimEnter * :tab all
 
-autocmd VimEnter * :60vsp | ter 
+autocmd VimEnter * :80vsp | ter 
 autocmd VimEnter * :set winfixwidth
 autocmd VimEnter * :set winfixheight
+autocmd VimEnter :set cc=80
 
 autocmd VimEnter * wincmd w
 

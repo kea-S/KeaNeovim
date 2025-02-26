@@ -11,7 +11,7 @@ return {
     lazy = false,
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "pylsp", "ts_ls", "clangd, tailwindcss-language-server"}
+        ensure_installed = { "lua_ls", "pylsp", "ts_ls", "clangd", "tailwindcss"}
       })
     end
   },
