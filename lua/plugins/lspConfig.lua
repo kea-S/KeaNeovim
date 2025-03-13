@@ -11,7 +11,8 @@ return {
     lazy = false,
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "pylsp", "ts_ls", "clangd", "tailwindcss"}
+        ensure_installed = { "lua_ls", "pylsp", "ts_ls", "clangd",
+          "tailwindcss", "gopls"}
       })
     end
   },
@@ -49,9 +50,13 @@ return {
       lspconfig.jdtls.setup({
         capabilities = capabilities,
       })
+      lspconfig.gopls.setup({
+        capabilities = capabilities,
+      })
 
-      vim.keymap.set('n', 'doc', vim.lsp.buf.hover, {})
-      vim.keymap.set('n', 'def', vim.lsp.buf.definition, {})
+      vim.keymap.set('n', 'gi', vim.lsp.buf.hover, {})
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+      vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
       vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
 
     end
