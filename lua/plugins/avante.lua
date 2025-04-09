@@ -12,7 +12,7 @@ return {
       model = "claude-3-5-sonnet-20241022", -- your desired model (or use gpt-4o, etc.)
       timeout = 30000, -- timeout in milliseconds
       temperature = 0, -- adjust if needed
-      max_tokens = 1024,
+      max_tokens = 2048,
       -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
     },
   },
