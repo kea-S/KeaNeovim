@@ -21,7 +21,7 @@ return {
       gemini = function()
         return require("codecompanion.adapters").extend("gemini", {
           env = {
-            api_key = "NO_SECRET_4_U",
+            api_key = vim.env.GEMINI_KEY
           },
           schema = {
             model = {
