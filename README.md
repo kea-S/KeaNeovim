@@ -3,6 +3,8 @@
 - telescope
 - treesitter
 - mason
-- chatgpt.nvim
+- codecompanion
 - autocomplete
 - lualine
+- markdown-reader
+- looking at jupyter notebooks
