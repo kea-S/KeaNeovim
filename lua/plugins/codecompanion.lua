@@ -21,7 +21,7 @@ return {
       gemini = function()
         return require("codecompanion.adapters").extend("gemini", {
           env = {
-            api_key = "NO_SECRET_4_U",
+            api_key = vim.env.GEMINI_KEY,
           },
           schema = {
             model = {
@@ -30,7 +30,20 @@ return {
           },
         })
       end,
-    },
+    }, {
+      claude = function()
+        return require("codecompanion.adapters").extend("claude", {
+          env = {
+            api_key = vim.env.ANTHROPIC_API_KEY,
+          },
+          schema = {
+            model = {
+              default = "claude-opus-4",
+            },
+          },
+        })
+      end,
+    }
   },
   config = function(_, opts)
     require("codecompanion").setup(opts)
