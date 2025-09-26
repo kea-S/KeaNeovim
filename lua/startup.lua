@@ -5,8 +5,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
     vim.cmd("set winfixwidth")
     vim.cmd("set winfixheight")
     vim.cmd("set cc=80")
-    vim.cmd("10sp | ter")
-    vim.cmd("wincmd w")
 
     -- Conditional behavior based on Neovim startup arguments
     if vim.fn.argv(0) == "" then

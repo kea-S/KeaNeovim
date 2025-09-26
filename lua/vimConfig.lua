@@ -1,3 +1,4 @@
+-- standard
 vim.cmd("set expandtab") vim.cmd("set tabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set autoindent")
@@ -13,9 +14,19 @@ vim.cmd("set splitright")
 vim.g.maplocalleader = "\\"
 vim.g.mapleader = " "
 
+-- remap switch window
+vim.cmd("noremap <C-h> <C-w>h")
+vim.cmd("noremap <C-j> <C-w>j")
+vim.cmd("noremap <C-k> <C-w>k")
+vim.cmd("noremap <C-l> <C-w>l")
+
+
+-- prevent usage of arrow keys
 vim.cmd("noremap <Up> <Nop>")
 vim.cmd("noremap <Down> <Nop>")
 vim.cmd("noremap <Left> <Nop>")
 vim.cmd("noremap <Right> <Nop>")
+
+-- allow for copy paste from outside terminal
 vim.api.nvim_set_keymap('n', '<C-h>', ':nohlsearch<CR>', { noremap = true, silent = true })
 vim.opt.clipboard = "unnamedplus"
