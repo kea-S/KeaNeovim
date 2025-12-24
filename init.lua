@@ -15,7 +15,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Retrieve the OpenAI API key from pass and trim any trailing whitespace/newlines
-local openai_key = vim.fn.system("pass show APIs/personal/neovim/chatGPTNvim"):gsub("%s+$", "")
+local openai_key = vim.fn.system("pass show APIs/personal/openai"):gsub("%s+$", "")
 local anthropic_key = vim.fn.system("pass show APIs/personal/anthropic"):gsub("%s+$", "")
 local gemini_key = vim.fn.system("pass show APIs/personal/gemini"):gsub("%s+$", "")
 -- Set it as an environment variable that Avante can read (if it uses OPENAI_API_KEY)

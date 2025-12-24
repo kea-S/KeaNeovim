@@ -8,17 +8,36 @@ return {
   opts = {
     strategies = {
       chat = {
-        adapter = "gemini",
+        adapter = "openai",
         split_size = "80c",
       },
       inline = {
-        adapter = "gemini",
+        adapter = "openai",
       },
       cmd = {
-        adapter = "gemini",
+        adapter = "openai",
       },
     },
     adapters = {
+      openai = function()
+        return require("codecompanion.adapters").extend("openai", {
+          env = {
+            api_key = vim.env.OPENAI_API_KEY,
+          },
+          schema = {
+            model = {
+              -- gpt-5.2 is the flagship thinking model
+              -- Use "gpt-5.2-chat-latest" if you want the faster 'Instant' version
+              default = "gpt-5.2-chat-latest",
+            },
+            -- This enables the new xhigh reasoning for December 2025
+            reasoning_effort = {
+              default = "medium", -- Options: low, medium, high, xhigh
+            },
+          }
+        })
+      end,
+    }, {
       gemini = function()
         return require("codecompanion.adapters").extend("gemini", {
           env = {
