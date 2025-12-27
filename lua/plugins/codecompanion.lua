@@ -6,63 +6,20 @@ return {
     "ravitemer/mcphub.nvim",
   },
   opts = {
-    strategies = {
+    interactions = {
       chat = {
-        adapter = "openai",
+        adapter = {
+          name = "gemini",
+          model = "gemini-3-flash-preview",
+        },
         split_size = "80c",
       },
       inline = {
-        adapter = "openai",
+        adapter = "gemini",
       },
       cmd = {
-        adapter = "openai",
+        adapter = "gemini",
       },
-    },
-    adapters = {
-      openai = function()
-        return require("codecompanion.adapters").extend("openai", {
-          env = {
-            api_key = vim.env.OPENAI_API_KEY,
-          },
-          schema = {
-            model = {
-              -- gpt-5.2 is the flagship thinking model
-              -- Use "gpt-5.2-chat-latest" if you want the faster 'Instant' version
-              default = "gpt-5.2-chat-latest",
-            },
-            -- This enables the new xhigh reasoning for December 2025
-            reasoning_effort = {
-              default = "medium", -- Options: low, medium, high, xhigh
-            },
-          }
-        })
-      end,
-    }, {
-      gemini = function()
-        return require("codecompanion.adapters").extend("gemini", {
-          env = {
-            api_key = vim.env.GEMINI_KEY,
-          },
-          schema = {
-            model = {
-              default = "gemini-2.5-flash",
-            },
-          },
-        })
-      end,
-    }, {
-      claude = function()
-        return require("codecompanion.adapters").extend("claude", {
-          env = {
-            api_key = vim.env.ANTHROPIC_API_KEY,
-          },
-          schema = {
-            model = {
-              default = "claude-opus-4",
-            },
-          },
-        })
-      end,
     },
     extensions = {
       mcphub = {
@@ -86,7 +43,6 @@ return {
     vim.keymap.set({ "n", "v" }, "<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
     vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 
-    -- Expand 'cc' into 'CodeCompanion' in the command line
     vim.cmd([[cab cc CodeCompanion]])
   end,
 }

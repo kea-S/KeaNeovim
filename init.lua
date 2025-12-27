@@ -21,7 +21,7 @@ local gemini_key = vim.fn.system("pass show APIs/personal/gemini"):gsub("%s+$", 
 -- Set it as an environment variable that Avante can read (if it uses OPENAI_API_KEY)
 vim.env.OPENAI_API_KEY = openai_key
 vim.env.ANTHROPIC_API_KEY = anthropic_key
-vim.env.GEMINI_KEY = gemini_key
+vim.env.GEMINI_API_KEY = gemini_key
 
 require("vimConfig")
 require("vimTerminal")
