@@ -14,14 +14,26 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Retrieve the OpenAI API key from pass and trim any trailing whitespace/newlines
-local openai_key = vim.fn.system("pass show APIs/personal/openai"):gsub("%s+$", "")
-local anthropic_key = vim.fn.system("pass show APIs/personal/anthropic"):gsub("%s+$", "")
-local gemini_key = vim.fn.system("pass show APIs/personal/gemini"):gsub("%s+$", "")
--- Set it as an environment variable that Avante can read (if it uses OPENAI_API_KEY)
-vim.env.OPENAI_API_KEY = openai_key
-vim.env.ANTHROPIC_API_KEY = anthropic_key
+local function get_config_key(pass_path, prompt)
+  local result = vim.fn.system("pass show " .. pass_path .. " 2>/dev/null"):gsub("%s+$", "")
+
+  if vim.v.shell_error ~= 0 or result == "" then
+    vim.api.nvim_echo({ { "\nKey not found in pass for: " .. pass_path, "WarningMsg" } }, true, {})
+    result = vim.fn.inputsecret(prompt .. ": ")
+  end
+  return result
+end
+
+-- Retrieve the keys or prompt if missing
+-- local openai_key = get_config_key("APIs/personal/openai", "Enter OpenAI API Key")
+-- local anthropic_key = get_config_key("APIs/personal/anthropic", "Enter Anthropic API Key")
+local gemini_key = get_config_key("APIs/personal/gemini", "Enter Gemini API Key")
+
+-- Set it as an environment variable
+-- vim.env.OPENAI_API_KEY = openai_key
+-- vim.env.ANTHROPIC_API_KEY = anthropic_key
 vim.env.GEMINI_API_KEY = gemini_key
+
 
 require("vimConfig")
 require("vimTerminal")
