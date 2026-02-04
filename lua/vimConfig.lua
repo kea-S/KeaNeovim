@@ -28,5 +28,24 @@ vim.cmd("noremap <Left> <Nop>")
 vim.cmd("noremap <Right> <Nop>")
 
 -- allow for copy paste from outside terminal
-vim.api.nvim_set_keymap('n', '<C-h>', ':nohlsearch<CR>', { noremap = true, silent = true })
-vim.opt.clipboard = "unnamedplus"
+-- Check if we are in an SSH session
+local is_ssh = os.getenv("SSH_CONNECTION") ~= nil or os.getenv("SSH_TTY") ~= nil
+
+if is_ssh then
+    vim.opt.clipboard = "unnamedplus"
+    vim.g.clipboard = {
+        name = 'osc52',
+        copy = {
+            ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+        },
+        paste = {
+            ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+        },
+    }
+else
+    -- On your local machine, Ghostty will use your system's 
+    -- native provider automatically if clipboard is set.
+    vim.opt.clipboard = "unnamedplus"
+end
