@@ -19,7 +19,11 @@ return {
     lazy = false,
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      local lspconfig = require("lspconfig")
+
+      -- Set global defaults for all LSP servers
+      vim.lsp.config('*', {
+        capabilities = capabilities,
+      })
 
       -- Configure Neovim's built-in diagnostic display
       vim.diagnostic.config({
@@ -45,42 +49,41 @@ return {
         },
       })
 
-      -- LSP setups
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.pylsp.setup({
-        capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      -- lsp setups
+      vim.lsp.enable('lua_ls')
+
+      vim.lsp.config('pylsp', {
+        cmd = { 'pylsp' },
+        filetypes = { 'python' },
         settings = {
           pylsp = {
             plugins = {
               jedi_completion = {
                 include_params = true,
               },
-              -- You can add other pylsp plugins here, e.g., 'flake8', 'yapf', 'pylint'
-              -- Ensure they are installed in your Python environment for pylsp to use them
-              -- flake8 = { enable = true },
-              -- pylint = { enable = false }, -- Example: disable pylint if you prefer flake8
+              -- Enable semantic tokens for better highlighting if supported by your pylsp version
+              pylsp_jedi = {
+                enabled = true,
+              },
             },
           },
         },
       })
-      lspconfig.ts_ls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.clangd.setup({
-        name = 'clangd',
-        cmd = {'clangd', '--background-index', '--clang-tidy', '--log=verbose'},
+
+      vim.lsp.enable('pylsp')
+
+      vim.lsp.enable('ts_ls')
+
+      vim.lsp.config('clangd', {
+        cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
         initialization_options = {
           fallback_flags = { '-std=c++17' },
         },
       })
-      lspconfig.jdtls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.gopls.setup({
-        capabilities = capabilities,
-      })
+      vim.lsp.enable('clangd')
+
+      vim.lsp.enable('jdtls')
+      vim.lsp.enable('gopls')
 
       vim.keymap.set('n', 'gi', vim.lsp.buf.hover, {})
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
