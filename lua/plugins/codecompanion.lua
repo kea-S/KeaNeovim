@@ -9,8 +9,10 @@ return {
     interactions = {
       chat = {
         adapter = {
-          name = "gemini",
-          model = "gemini-3-flash-preview",
+          -- name = "gemini",
+          -- model = "gemini-3-flash-preview",
+          name = "openai",
+          model = "gpt-5-mini",
         },
         split_size = "80c",
       },

@@ -25,12 +25,12 @@ local function get_config_key(pass_path, prompt)
 end
 
 -- Retrieve the keys or prompt if missing
--- local openai_key = get_config_key("APIs/personal/openai", "Enter OpenAI API Key")
+local openai_key = get_config_key("APIs/personal/openai", "Enter OpenAI API Key")
 -- local anthropic_key = get_config_key("APIs/personal/anthropic", "Enter Anthropic API Key")
 local gemini_key = get_config_key("APIs/personal/gemini", "Enter Gemini API Key")
 
 -- Set it as an environment variable
--- vim.env.OPENAI_API_KEY = openai_key
+vim.env.OPENAI_API_KEY = openai_key
 -- vim.env.ANTHROPIC_API_KEY = anthropic_key
 vim.env.GEMINI_API_KEY = gemini_key
 
