@@ -6,13 +6,26 @@ return {
     "ravitemer/mcphub.nvim",
   },
   opts = {
+    adapters = {
+      acp = {
+        codex = function()
+          return require("codecompanion.adapters").extend("codex", {
+            defaults = {
+              auth_method = "openai-api-key", -- "openai-api-key"|"codex-api-key"|"chatgpt"
+            },
+            env = {
+              OPENAI_API_KEY = "OPENAI_API_KEY"
+            },
+          })
+        end,
+      }
+    },
     interactions = {
       chat = {
         adapter = {
           -- name = "gemini",
           -- model = "gemini-3-flash-preview",
-          name = "openai",
-          model = "gpt-5-mini",
+          name = "codex",
         },
         split_size = "80c",
       },
