@@ -6,6 +6,13 @@ return {
     "ravitemer/mcphub.nvim",
   },
   opts = {
+    prompt_library = {
+      markdown = {
+        dirs = {
+          vim.fn.stdpath("config") .. "/prompts",
+        },
+      },
+    },
     adapters = {
       acp = {
         codex = function()
